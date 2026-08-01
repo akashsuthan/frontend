@@ -1,198 +1,436 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
+/* ─── Design Tokens ─────────────────────────────────────────── */
 :root {
-  --bg-color: #0f172a;
-  --node-bg: rgba(30, 41, 59, 0.7);
-  --node-border: rgba(255, 255, 255, 0.1);
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --accent: #8b5cf6;
-  --accent-hover: #7c3aed;
-  --handle-bg: #8b5cf6;
-  --handle-border: #c4b5fd;
+  --bg:           #ffffff;
+  --bg-panel:     #ffffff;
+  --bg-field:     #f1f5f9;
+  --bg-pill:      #ffffff;
+
+  --border:       #e2e8f0;
+  --border-focus: #94a3b8;
+
+  --text-hi:      #0f172a;
+  --text-md:      #475569;
+  --text-lo:      #94a3b8;
+
+  --handle-source: #1e293b;
+  --handle-target: #e2e8f0;
+
+  --btn-bg:       #111827;
+  --btn-text:     #ffffff;
+  --btn-hover:    #1f2937;
   
-  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
-  --shadow-glow: 0 0 15px rgba(139, 92, 246, 0.3);
+  --logo-bg:      #1e293b;
+  --logo-fg:      #ffffff;
+  
+  --grid-dots:    #f1f5f9;
+  --edge-color:   #94a3b8;
+  --edge-hover:   #475569;
+  
+  --handle-left-bg: #e2e8f0;
+  --handle-left-border: #cbd5e1;
+  --handle-right-bg: #1e293b;
+  --handle-right-border: #1e293b;
+  
+  --toast-shadow: 0 10px 30px rgba(0,0,0,0.08);
+
+  --radius-node:  12px;
+  --radius-sm:    8px;
+  --radius-xs:    6px;
+
+  --shadow-node:  0 2px 8px rgba(0,0,0,0.06);
+
+  --font-ui:   'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Lora', serif;
 }
+
+[data-theme='dark'] {
+  --bg:           #070d1a;
+  --bg-panel:     #0d1526;
+  --bg-field:     rgba(0,0,0,0.35);
+  --bg-pill:      rgba(255,255,255,0.03);
+
+  --border:       rgba(255,255,255,0.07);
+  --border-focus: rgba(124,58,237,0.6);
+
+  --text-hi:      #f1f5f9;
+  --text-md:      #94a3b8;
+  --text-lo:      #4b5a72;
+
+  --btn-bg:       #7c3aed;
+  --btn-text:     #ffffff;
+  --btn-hover:    #6d28d9;
+  
+  --logo-bg:      #7c3aed;
+  --logo-fg:      #ffffff;
+  
+  --grid-dots:    rgba(255,255,255,0.035);
+  --edge-color:   rgba(124,58,237,0.6);
+  --edge-hover:   #7c3aed;
+  
+  --handle-left-bg: #06b6d4;
+  --handle-left-border: rgba(6,182,212,0.5);
+  --handle-right-bg: #7c3aed;
+  --handle-right-border: rgba(124,58,237,0.5);
+
+  --toast-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  --shadow-node:  0 4px 24px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3);
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-main);
+  font-family: var(--font-ui);
+  background: var(--bg);
+  color: var(--text-hi);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
-/* React Flow Background override */
-.react-flow__background {
-  background-color: var(--bg-color);
+/* ─── App Shell ──────────────────────────────────────────────── */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
 }
 
-.react-flow__background-pattern {
-  fill: rgba(255, 255, 255, 0.05) !important;
+/* ─── Toolbar ────────────────────────────────────────────────── */
+.toolbar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  height: 64px;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 20;
 }
 
-/* Toolbar styling */
-.toolbar-container {
-  padding: 10px;
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--node-border);
+.toolbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 32px;
+  flex-shrink: 0;
 }
 
-.draggable-node {
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--node-border);
+.toolbar-logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--logo-bg);
   border-radius: 8px;
-  color: var(--text-main);
-  cursor: grab;
-  font-weight: 500;
-  font-size: 14px;
-  transition: all 0.2s ease;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.draggable-node:hover {
-  background: var(--accent);
-  border-color: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glow);
+.toolbar-logo-text {
+  font-size: 17px;
+  font-weight: 700;
+  font-family: var(--font-serif);
+  color: var(--text-hi);
+  letter-spacing: -0.02em;
 }
 
-.draggable-node:active {
-  cursor: grabbing;
+.toolbar-nodes {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex: 1;
 }
 
-/* Node styling */
-.custom-node {
-  background: var(--node-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--node-border);
-  border-radius: 12px;
-  min-width: 220px;
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+/* ─── Draggable Node Pill ─────────────────────────────────────── */
+.node-pill {
+  display: flex;
+  align-items: center;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-pill);
+  cursor: grab;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-md);
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* ─── Canvas Area ─────────────────────────────────────────────── */
+.canvas-area {
+  flex: 1;
+  position: relative;
   overflow: hidden;
 }
 
-.custom-node:hover {
-  box-shadow: var(--shadow-md), var(--shadow-glow);
-  border-color: rgba(139, 92, 246, 0.5);
+.react-flow__background {
+  background: var(--bg) !important;
 }
 
-/* Node selected state provided by React Flow */
-.react-flow__node.selected .custom-node {
-  border-color: var(--accent);
-  box-shadow: var(--shadow-md), 0 0 0 1px var(--accent);
+.react-flow__background-pattern {
+  fill: var(--grid-dots) !important;
 }
 
-.node-header {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--node-border);
-  font-weight: 600;
-  font-size: 14px;
+/* Edge styling */
+.react-flow__edge-path {
+  stroke: var(--edge-color) !important;
+  stroke-width: 2 !important;
+}
+
+.react-flow__edge.selected .react-flow__edge-path,
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: var(--edge-hover) !important;
+}
+
+/* ─── Handles ─────────────────────────────────────────────────── */
+.react-flow__handle {
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  border: 2px solid !important;
+  z-index: 10 !important;
+}
+
+.react-flow__handle-left {
+  background: var(--handle-left-bg) !important;
+  border-color: var(--handle-left-border) !important;
+  left: -8px !important;
+}
+
+.react-flow__handle-right {
+  background: var(--handle-right-bg) !important;
+  border-color: var(--handle-right-border) !important;
+  right: -8px !important;
+}
+
+/* ─── Base Node Card ──────────────────────────────────────────── */
+.vs-node {
+  background: var(--bg-pill);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-node);
+  min-width: 220px;
+  box-shadow: var(--shadow-node);
+  position: relative;
+}
+
+.react-flow__node.selected .vs-node {
+  border-color: #94a3b8;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ─── Node Header ─────────────────────────────────────────────── */
+.vs-node-header {
+  padding: 12px 16px 8px 16px;
   display: flex;
   align-items: center;
-  color: #e2e8f0;
+  justify-content: space-between;
 }
 
-.node-content {
-  padding: 14px;
+.vs-node-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-hi);
+}
+
+.vs-node-close {
+  background: none;
+  border: none;
+  color: var(--text-lo);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.vs-node-close:hover {
+  color: var(--text-hi);
+}
+
+/* ─── Node Body ───────────────────────────────────────────────── */
+.vs-node-body {
+  padding: 4px 16px 16px 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.node-label {
+/* ─── Form Fields ─────────────────────────────────────────────── */
+.vs-field {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+.vs-label {
   font-size: 12px;
-  color: var(--text-muted);
   font-weight: 500;
+  color: var(--text-md);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-/* Form Elements */
-.node-input, .node-select, .node-textarea {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
+.vs-label-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--logo-bg);
+  display: inline-block;
+}
+
+.vs-input,
+.vs-select,
+.vs-textarea {
+  background: var(--bg-field);
+  border: 1px solid transparent;
+  border-radius: var(--radius-xs);
   padding: 8px 10px;
-  color: var(--text-main);
-  font-family: 'Inter', sans-serif;
+  color: var(--text-hi);
+  font-family: var(--font-ui);
   font-size: 13px;
-  transition: all 0.2s ease;
   outline: none;
+  width: 100%;
 }
 
-.node-input:focus, .node-select:focus, .node-textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+.vs-input:focus,
+.vs-select:focus,
+.vs-textarea:focus {
+  border-color: #cbd5e1;
 }
 
-.node-textarea {
+.vs-textarea {
   resize: none;
   overflow: hidden;
-  min-height: 24px;
+  min-height: 40px;
 }
 
-.node-text {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.5;
+/* Handle label chip (for variable handles) */
+.vs-var-chip {
+  display: inline-flex;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #0284c7;
+  background: #e0f2fe;
+  border-radius: 12px;
+  padding: 4px 10px;
 }
 
-/* Handles */
-.react-flow__handle {
-  width: 10px !important;
-  height: 10px !important;
-  background: var(--handle-bg) !important;
-  border: 2px solid var(--handle-border) !important;
-  transition: transform 0.2s ease;
+.vs-vars-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-.react-flow__handle:hover {
-  transform: scale(1.3);
-  background: #fff !important;
+/* ─── Submit Button ───────────────────────────────────────────── */
+.submit-wrap {
+  /* It is now rendered inside Toolbar! We'll just define the button style here */
 }
 
-/* Submit Button Container */
-.submit-container {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-  z-index: 10;
+.review-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 20px;
+  background: var(--bg-pill);
+  color: var(--text-hi);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.review-btn:hover {
+  background: var(--bg-field);
+  border-color: var(--border-focus);
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-  color: white;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 15px;
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  box-shadow: var(--shadow-md), 0 4px 15px rgba(139, 92, 246, 0.4);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  padding: 8px 24px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 24px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.submit-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: var(--shadow-md), 0 6px 20px rgba(139, 92, 246, 0.6);
+.submit-btn:hover:not(:disabled) {
+  background: var(--btn-hover);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.submit-btn:active {
-  transform: translateY(1px);
+.submit-btn:disabled, .review-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ─── Pipeline Result Toast ───────────────────────────────────── */
+.pipeline-toast {
+  background: var(--bg-pill);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: var(--toast-shadow);
+  min-width: 240px;
+  position: absolute;
+  top: 80px;
+  right: 24px;
+  z-index: 50;
+  animation: slideIn 0.25s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pipeline-toast-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-hi);
+  margin-bottom: 12px;
+}
+
+.pipeline-toast-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.pipeline-toast-row:last-child { border-bottom: none; }
+
+.pipeline-toast-key { font-size: 12px; color: var(--text-md); }
+.pipeline-toast-val { font-size: 13px; font-weight: 500; color: var(--text-hi); }
+
+.pipeline-toast-val.is-dag-yes { color: #10b981; }
+.pipeline-toast-val.is-dag-no  { color: #ef4444; }
+
+.toast-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: none;
+  border: none;
+  color: var(--text-lo);
+  cursor: pointer;
+  font-size: 18px;
+}
+.toast-close:hover { color: var(--text-hi); }
+

@@ -1,22 +1,31 @@
-// BaseNode.js
+// BaseNode.js — Professional redesign
 
 import { Handle } from "reactflow";
+import { useStore } from "../../store";
+import { X } from 'lucide-react';
 
 export const BaseNode = ({ id, title, children, handles, style }) => {
   return (
-    <div className="custom-node" style={style}>
-      <div className="node-header">
-        <span>{title}</span>
+    <div className="vs-node" style={style}>
+      <div className="vs-node-header">
+        <span className="vs-node-title">{title}</span>
+        <button 
+          className="vs-node-close" 
+          onClick={() => useStore.getState().removeNode(id)}
+        ><X size={16} /></button>
       </div>
-      <div className="node-content">{children}</div>
+      <div className="vs-node-body">
+        {children}
+      </div>
 
-      {handles.map((handle, index) => (
+      {handles.map((handle) => (
         <Handle
-          key={index}
+          key={handle.id}
           type={handle.type}
           position={handle.position}
           id={handle.id}
-          style={{ ...handle.style }}
+          style={handle.style}
+          title={handle.label}
         />
       ))}
     </div>
