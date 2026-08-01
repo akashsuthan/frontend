@@ -34,8 +34,13 @@ export const useStore = create(temporal((set, get) => ({
         });
     },
     onNodesChange: (changes) => {
+      const nextNodes = applyNodeChanges(changes, get().nodes);
+      const nodeIds = new Set(nextNodes.map(n => n.id));
+      const nextEdges = get().edges.filter(edge => nodeIds.has(edge.source) && nodeIds.has(edge.target));
+      
       set({
-        nodes: applyNodeChanges(changes, get().nodes),
+        nodes: nextNodes,
+        edges: nextEdges,
       });
     },
     onEdgesChange: (changes) => {
