@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg-color: #0f172a;
+  --node-bg: rgba(30, 41, 59, 0.7);
+  --node-border: rgba(255, 255, 255, 0.1);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #8b5cf6;
+  --accent-hover: #7c3aed;
+  --handle-bg: #8b5cf6;
+  --handle-border: #c4b5fd;
+  
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* React Flow Background override */
+.react-flow__background {
+  background-color: var(--bg-color);
+}
+
+.react-flow__background-pattern {
+  fill: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Toolbar styling */
+.toolbar-container {
+  padding: 10px;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--node-border);
+}
+
+.draggable-node {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--node-border);
+  border-radius: 8px;
+  color: var(--text-main);
+  cursor: grab;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.draggable-node:hover {
+  background: var(--accent);
+  border-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.draggable-node:active {
+  cursor: grabbing;
+}
+
+/* Node styling */
+.custom-node {
+  background: var(--node-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--node-border);
+  border-radius: 12px;
+  min-width: 220px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  overflow: hidden;
+}
+
+.custom-node:hover {
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+/* Node selected state provided by React Flow */
+.react-flow__node.selected .custom-node {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md), 0 0 0 1px var(--accent);
+}
+
+.node-header {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--node-border);
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  color: #e2e8f0;
+}
+
+.node-content {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.node-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Form Elements */
+.node-input, .node-select, .node-textarea {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.node-input:focus, .node-select:focus, .node-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+.node-textarea {
+  resize: none;
+  overflow: hidden;
+  min-height: 24px;
+}
+
+.node-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Handles */
+.react-flow__handle {
+  width: 10px !important;
+  height: 10px !important;
+  background: var(--handle-bg) !important;
+  border: 2px solid var(--handle-border) !important;
+  transition: transform 0.2s ease;
+}
+
+.react-flow__handle:hover {
+  transform: scale(1.3);
+  background: #fff !important;
+}
+
+/* Submit Button Container */
+.submit-container {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  z-index: 10;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  box-shadow: var(--shadow-md), 0 4px 15px rgba(139, 92, 246, 0.4);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-md), 0 6px 20px rgba(139, 92, 246, 0.6);
+}
+
+.submit-btn:active {
+  transform: translateY(1px);
+}
