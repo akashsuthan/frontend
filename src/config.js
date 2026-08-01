@@ -30,3 +30,15 @@ export const NODE_LABELS = {
   DATABASE: 'Database',
 };
 
+export const NODE_INFO = {
+  INPUT: 'Defines an input variable for your pipeline. Use this to pass data into the graph at runtime.',
+  LLM: 'Calls an LLM. Contains 2 inputs: System (for defining the AI persona/rules) and Prompt (for the actual user query).',
+  OUTPUT: 'Defines a final output of your pipeline. The result of the connected node will be returned.',
+  TEXT: 'A text template that can embed variables using {{variableName}} syntax.',
+  TRANSFORM: 'Applies a string manipulation function (like Uppercase or Slugify) to the input data.',
+  FILTER: 'Conditionally routes data to a Pass or Fail branch based on a logical expression.',
+  MATH: 'Performs a mathematical operation on two numeric inputs.',
+  API: 'Makes an HTTP request to an external API endpoint.',
+  DATABASE: 'Executes a query against a connected database collection.',
+};
+

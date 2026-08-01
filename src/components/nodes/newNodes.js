@@ -1,34 +1,7 @@
 import { useState } from 'react';
 import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
-import { NODE_LABELS } from '../../config';
-
-/* ── Icons ── */
-const TransformIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/>
-  </svg>
-);
-const FilterIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
-  </svg>
-);
-const MathIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-  </svg>
-);
-const APIIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/>
-  </svg>
-);
-const DBIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-  </svg>
-);
+import { NODE_LABELS, NODE_INFO } from '../../config';
 
 /* ── 1. Transform ── */
 export const TransformNode = ({ id, data }) => {
@@ -38,7 +11,7 @@ export const TransformNode = ({ id, data }) => {
     { type: 'source', position: Position.Right, id: `${id}-output`, label: 'Output' },
   ];
   return (
-    <BaseNode id={id} title={NODE_LABELS.TRANSFORM} badge="text" icon={<TransformIcon />} accentColor="var(--node-transform)" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.TRANSFORM} info={NODE_INFO.TRANSFORM} handles={handles}>
       <div className="vs-field">
         <label className="vs-label">Method</label>
         <select className="vs-select" value={method} onChange={e => setMethod(e.target.value)}>
@@ -62,7 +35,7 @@ export const FilterNode = ({ id, data }) => {
     { type: 'source', position: Position.Right, id: `${id}-fail`,   label: 'Fail',  style: { top: '65%' } },
   ];
   return (
-    <BaseNode id={id} title={NODE_LABELS.FILTER} badge="conditional" icon={<FilterIcon />} accentColor="var(--node-filter)" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.FILTER} info={NODE_INFO.FILTER} handles={handles}>
       <div className="vs-field">
         <label className="vs-label">Condition</label>
         <input className="vs-input" type="text" value={condition} onChange={e => setCondition(e.target.value)} placeholder="e.g. length > 5" />
@@ -80,7 +53,7 @@ export const MathNode = ({ id, data }) => {
     { type: 'source', position: Position.Right, id: `${id}-output`, label: 'Result' },
   ];
   return (
-    <BaseNode id={id} title={NODE_LABELS.MATH} badge="numeric" icon={<MathIcon />} accentColor="var(--node-math)" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.MATH} info={NODE_INFO.MATH} handles={handles}>
       <div className="vs-field">
         <label className="vs-label">Operation</label>
         <select className="vs-select" value={operation} onChange={e => setOperation(e.target.value)}>
@@ -105,7 +78,7 @@ export const APINode = ({ id, data }) => {
     { type: 'source', position: Position.Right, id: `${id}-data`,    label: 'Response' },
   ];
   return (
-    <BaseNode id={id} title={NODE_LABELS.API} badge="http" icon={<APIIcon />} accentColor="var(--node-api)" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.API} info={NODE_INFO.API} handles={handles}>
       <div className="vs-field" style={{ flexDirection: 'row', gap: '8px', alignItems: 'flex-end' }}>
         <div style={{ flex: '0 0 72px' }}>
           <label className="vs-label">Method</label>
@@ -131,7 +104,7 @@ export const DatabaseNode = ({ id, data }) => {
     { type: 'source', position: Position.Right, id: `${id}-results`, label: 'Results' },
   ];
   return (
-    <BaseNode id={id} title={NODE_LABELS.DATABASE} badge="mongo" icon={<DBIcon />} accentColor="var(--node-database)" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.DATABASE} info={NODE_INFO.DATABASE} handles={handles}>
       <div className="vs-field">
         <label className="vs-label">Collection</label>
         <input className="vs-input" type="text" value={collection} onChange={e => setCollection(e.target.value)} />

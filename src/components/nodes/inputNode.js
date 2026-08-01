@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
-import { NODE_LABELS } from '../../config';
+import { NODE_LABELS, NODE_INFO } from '../../config';
 
 export const InputNode = ({ id, data }) => {
   const [currName, setCurrName] = useState(data?.inputName || id.replace('customInput-', 'input_'));
@@ -12,7 +12,7 @@ export const InputNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode id={id} title={NODE_LABELS.INPUT} handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.INPUT} info={NODE_INFO.INPUT} handles={handles}>
       <div className="vs-field">
         <label className="vs-label">
            Name

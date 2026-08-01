@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
-
-const Icon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
-    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
-  </svg>
-);
+import { NODE_LABELS, NODE_INFO } from '../../config';
 
 export const LLMNode = ({ id, data }) => {
   const [model, setModel] = useState(data?.model || 'gpt-4o');
@@ -20,7 +14,7 @@ export const LLMNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode id={id} title={NODE_LABELS.LLM} badge="model" icon={<Icon />} accentColor="var(--node-llm)" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.LLM} info={NODE_INFO.LLM} handles={handles}>
       <div className="vs-field">
         <label className="vs-label">Model</label>
         <select className="vs-select" value={model} onChange={e => setModel(e.target.value)}>
