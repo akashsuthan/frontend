@@ -1,6 +1,6 @@
-// submit.js
-import { useStore } from './store';
+import { useStore } from '../store';
 import { shallow } from 'zustand/shallow';
+import { parsePipeline } from '../services/api';
 
 const selector = (state) => ({
     nodes: state.nodes,
@@ -12,19 +12,7 @@ export const SubmitButton = () => {
 
     const handleSubmit = async () => {
         try {
-            const response = await fetch('http://localhost:8000/pipelines/parse', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ nodes, edges })
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json();
+            const data = await parsePipeline(nodes, edges);
             
             // Format the alert message nicely
             alert(
@@ -36,7 +24,6 @@ export const SubmitButton = () => {
             );
 
         } catch (error) {
-            console.error('Error submitting pipeline:', error);
             alert('Failed to submit pipeline. Please ensure the backend is running.');
         }
     };

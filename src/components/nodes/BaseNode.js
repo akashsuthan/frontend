@@ -1,6 +1,6 @@
 // BaseNode.js
 
-import { Handle, Position } from 'reactflow';
+import { Handle } from "reactflow";
 
 export const BaseNode = ({ id, title, children, handles, style }) => {
   return (
@@ -8,10 +8,8 @@ export const BaseNode = ({ id, title, children, handles, style }) => {
       <div className="node-header">
         <span>{title}</span>
       </div>
-      <div className="node-content">
-        {children}
-      </div>
-      
+      <div className="node-content">{children}</div>
+
       {handles.map((handle, index) => (
         <Handle
           key={index}
