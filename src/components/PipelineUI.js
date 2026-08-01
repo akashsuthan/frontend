@@ -6,7 +6,7 @@ import { InputNode } from './nodes/inputNode';
 import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
-import { TransformNode, FilterNode, MathNode, APINode, DatabaseNode } from './nodes/newNodes';
+import { TransformNode, APINode, DatabaseNode } from './nodes/newNodes';
 import { NODE_TYPES } from '../config';
 import 'reactflow/dist/style.css';
 
@@ -18,8 +18,6 @@ const nodeTypes = {
   [NODE_TYPES.OUTPUT]: OutputNode,
   [NODE_TYPES.TEXT]: TextNode, 
   [NODE_TYPES.TRANSFORM]: TransformNode, 
-  [NODE_TYPES.FILTER]: FilterNode,
-  [NODE_TYPES.MATH]: MathNode, 
   [NODE_TYPES.API]: APINode, 
   [NODE_TYPES.DATABASE]: DatabaseNode,
 };

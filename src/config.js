@@ -12,8 +12,6 @@ export const NODE_TYPES = {
   OUTPUT: 'customOutput',
   TEXT: 'text',
   TRANSFORM: 'transform',
-  FILTER: 'filter',
-  MATH: 'math',
   API: 'api',
   DATABASE: 'database',
 };
@@ -24,8 +22,6 @@ export const NODE_LABELS = {
   OUTPUT: 'Output',
   TEXT: 'Text',
   TRANSFORM: 'Transform',
-  FILTER: 'Filter',
-  MATH: 'Math',
   API: 'API Request',
   DATABASE: 'Database',
 };
@@ -36,9 +32,6 @@ export const NODE_INFO = {
   OUTPUT: 'Defines a final output of your pipeline. The result of the connected node will be returned.',
   TEXT: 'A text template that can embed variables using {{variableName}} syntax.',
   TRANSFORM: 'Applies a string manipulation function (like Uppercase or Slugify) to the input data.',
-  FILTER: 'Conditionally routes data to a Pass or Fail branch based on a logical expression.',
-  MATH: 'Performs a mathematical operation on two numeric inputs.',
   API: 'Makes an HTTP request to an external API endpoint.',
   DATABASE: 'Executes a query against a connected database collection.',
 };
-
