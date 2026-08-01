@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
+import { NODE_LABELS } from '../../config';
 
 /* ── Icons ── */
 const TransformIcon = () => (
@@ -37,7 +38,7 @@ export const TransformNode = ({ id, data }) => {
     { type: 'source', position: Position.Right, id: `${id}-output`, label: 'Output' },
   ];
   return (
-    <BaseNode id={id} title="Transform" badge="text" icon={<TransformIcon />} accentColor="var(--node-transform)" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.TRANSFORM} badge="text" icon={<TransformIcon />} accentColor="var(--node-transform)" handles={handles}>
       <div className="vs-field">
         <label className="vs-label">Method</label>
         <select className="vs-select" value={method} onChange={e => setMethod(e.target.value)}>
@@ -61,7 +62,7 @@ export const FilterNode = ({ id, data }) => {
     { type: 'source', position: Position.Right, id: `${id}-fail`,   label: 'Fail',  style: { top: '65%' } },
   ];
   return (
-    <BaseNode id={id} title="Filter" badge="conditional" icon={<FilterIcon />} accentColor="var(--node-filter)" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.FILTER} badge="conditional" icon={<FilterIcon />} accentColor="var(--node-filter)" handles={handles}>
       <div className="vs-field">
         <label className="vs-label">Condition</label>
         <input className="vs-input" type="text" value={condition} onChange={e => setCondition(e.target.value)} placeholder="e.g. length > 5" />
@@ -79,7 +80,7 @@ export const MathNode = ({ id, data }) => {
     { type: 'source', position: Position.Right, id: `${id}-output`, label: 'Result' },
   ];
   return (
-    <BaseNode id={id} title="Math" badge="numeric" icon={<MathIcon />} accentColor="var(--node-math)" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.MATH} badge="numeric" icon={<MathIcon />} accentColor="var(--node-math)" handles={handles}>
       <div className="vs-field">
         <label className="vs-label">Operation</label>
         <select className="vs-select" value={operation} onChange={e => setOperation(e.target.value)}>
@@ -104,7 +105,7 @@ export const APINode = ({ id, data }) => {
     { type: 'source', position: Position.Right, id: `${id}-data`,    label: 'Response' },
   ];
   return (
-    <BaseNode id={id} title="API Request" badge="http" icon={<APIIcon />} accentColor="var(--node-api)" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.API} badge="http" icon={<APIIcon />} accentColor="var(--node-api)" handles={handles}>
       <div className="vs-field" style={{ flexDirection: 'row', gap: '8px', alignItems: 'flex-end' }}>
         <div style={{ flex: '0 0 72px' }}>
           <label className="vs-label">Method</label>
@@ -130,7 +131,7 @@ export const DatabaseNode = ({ id, data }) => {
     { type: 'source', position: Position.Right, id: `${id}-results`, label: 'Results' },
   ];
   return (
-    <BaseNode id={id} title="Database" badge="mongo" icon={<DBIcon />} accentColor="var(--node-database)" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.DATABASE} badge="mongo" icon={<DBIcon />} accentColor="var(--node-database)" handles={handles}>
       <div className="vs-field">
         <label className="vs-label">Collection</label>
         <input className="vs-input" type="text" value={collection} onChange={e => setCollection(e.target.value)} />

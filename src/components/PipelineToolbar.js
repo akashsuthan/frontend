@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { DraggableNode } from './DraggableNode';
 import { SubmitButton } from './SubmitButton';
 import { Sun, Moon } from 'lucide-react';
+import { NODE_TYPES, NODE_LABELS } from '../config';
 
 export const PipelineToolbar = () => {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
@@ -21,11 +22,11 @@ export const PipelineToolbar = () => {
           <span className="toolbar-logo-text">VectorShift</span>
         </div>
         <div className="toolbar-nodes">
-          <DraggableNode type="customInput"  label="Input" />
-          <DraggableNode type="llm"          label="LLM" />
-          <DraggableNode type="text"         label="Text" />
-          <DraggableNode type="customOutput" label="Output" />
-          <DraggableNode type="transform"    label="Transform" />
+          <DraggableNode type={NODE_TYPES.INPUT}      label={NODE_LABELS.INPUT} />
+          <DraggableNode type={NODE_TYPES.LLM}        label={NODE_LABELS.LLM} />
+          <DraggableNode type={NODE_TYPES.TEXT}       label={NODE_LABELS.TEXT} />
+          <DraggableNode type={NODE_TYPES.OUTPUT}     label={NODE_LABELS.OUTPUT} />
+          <DraggableNode type={NODE_TYPES.TRANSFORM}  label={NODE_LABELS.TRANSFORM} />
         </div>
       </div>
       

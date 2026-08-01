@@ -1,9 +1,9 @@
 // services/api.js
-const API_BASE_URL = 'http://localhost:8000';
+import { API_ENDPOINTS } from '../config';
 
 export const parsePipeline = async (nodes, edges) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/pipelines/parse`, {
+        const response = await fetch(API_ENDPOINTS.PARSE_PIPELINE, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

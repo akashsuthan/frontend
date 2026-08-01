@@ -1,15 +1,17 @@
 // DraggableNode.js — pill with icon + color dot
 
+import { NODE_TYPES, NODE_LABELS } from '../config';
+
 const NODE_META = {
-  customInput: { label: 'Input',       color: '#06b6d4', icon: '⬡' },
-  llm:          { label: 'LLM',        color: '#f59e0b', icon: '⬡' },
-  customOutput: { label: 'Output',     color: '#10b981', icon: '⬡' },
-  text:         { label: 'Text',       color: '#8b5cf6', icon: '⬡' },
-  transform:    { label: 'Transform',  color: '#3b82f6', icon: '⬡' },
-  filter:       { label: 'Filter',     color: '#ef4444', icon: '⬡' },
-  math:         { label: 'Math',       color: '#f97316', icon: '⬡' },
-  api:          { label: 'API Request',color: '#06b6d4', icon: '⬡' },
-  database:     { label: 'Database',   color: '#6366f1', icon: '⬡' },
+  [NODE_TYPES.INPUT]:     { label: NODE_LABELS.INPUT,       color: '#06b6d4', icon: '⬡' },
+  [NODE_TYPES.LLM]:       { label: NODE_LABELS.LLM,         color: '#f59e0b', icon: '⬡' },
+  [NODE_TYPES.OUTPUT]:    { label: NODE_LABELS.OUTPUT,      color: '#10b981', icon: '⬡' },
+  [NODE_TYPES.TEXT]:      { label: NODE_LABELS.TEXT,        color: '#8b5cf6', icon: '⬡' },
+  [NODE_TYPES.TRANSFORM]: { label: NODE_LABELS.TRANSFORM,   color: '#3b82f6', icon: '⬡' },
+  [NODE_TYPES.FILTER]:    { label: NODE_LABELS.FILTER,      color: '#ef4444', icon: '⬡' },
+  [NODE_TYPES.MATH]:      { label: NODE_LABELS.MATH,        color: '#f97316', icon: '⬡' },
+  [NODE_TYPES.API]:       { label: NODE_LABELS.API,         color: '#06b6d4', icon: '⬡' },
+  [NODE_TYPES.DATABASE]:  { label: NODE_LABELS.DATABASE,    color: '#6366f1', icon: '⬡' },
 };
 
 // Icons removed in favor of simple pill design

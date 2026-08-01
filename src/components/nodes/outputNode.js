@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
+import { NODE_LABELS } from '../../config';
 
 const Icon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -17,7 +18,7 @@ export const OutputNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode id={id} title="Output" badge="sink" icon={<Icon />} accentColor="var(--node-output)" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.OUTPUT} badge="sink" icon={<Icon />} accentColor="var(--node-output)" handles={handles}>
       <div className="vs-field">
         <label className="vs-label">Name</label>
         <input className="vs-input" type="text" value={currName} onChange={e => setCurrName(e.target.value)} />

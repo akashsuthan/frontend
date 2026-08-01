@@ -14,13 +14,13 @@ export const LLMNode = ({ id, data }) => {
   const [temp, setTemp] = useState(data?.temperature ?? 0.7);
 
   const handles = [
-    { type: 'target', position: Position.Left, id: `${id}-system`,  label: 'System prompt', style: { top: '30%' } },
-    { type: 'target', position: Position.Left, id: `${id}-prompt`,  label: 'User prompt',   style: { top: '70%' } },
+    { type: 'target', position: Position.Left, id: `${id}-system`,  label: 'System', style: { top: `${100/3}%` } },
+    { type: 'target', position: Position.Left, id: `${id}-prompt`,  label: 'Prompt',   style: { top: `${200/3}%` } },
     { type: 'source', position: Position.Right, id: `${id}-response`, label: 'Response' },
   ];
 
   return (
-    <BaseNode id={id} title="LLM" badge="model" icon={<Icon />} accentColor="var(--node-llm)" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.LLM} badge="model" icon={<Icon />} accentColor="var(--node-llm)" handles={handles}>
       <div className="vs-field">
         <label className="vs-label">Model</label>
         <select className="vs-select" value={model} onChange={e => setModel(e.target.value)}>

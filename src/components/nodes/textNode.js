@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Position, useUpdateNodeInternals } from 'reactflow';
 import { BaseNode } from './BaseNode';
 import { useStore } from '../../store';
+import { NODE_LABELS } from '../../config';
 
 export const TextNode = ({ id, data }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
@@ -51,7 +52,7 @@ export const TextNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode id={id} title="Text" handles={handles}>
+    <BaseNode id={id} title={NODE_LABELS.TEXT} handles={handles}>
       <div className="vs-field">
         <label className="vs-label">
           <span className="vs-label-dot" /> template

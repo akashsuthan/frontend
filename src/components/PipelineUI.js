@@ -7,14 +7,21 @@ import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
 import { TransformNode, FilterNode, MathNode, APINode, DatabaseNode } from './nodes/newNodes';
+import { NODE_TYPES } from '../config';
 import 'reactflow/dist/style.css';
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
 const nodeTypes = {
-  customInput: InputNode, llm: LLMNode, customOutput: OutputNode,
-  text: TextNode, transform: TransformNode, filter: FilterNode,
-  math: MathNode, api: APINode, database: DatabaseNode,
+  [NODE_TYPES.INPUT]: InputNode, 
+  [NODE_TYPES.LLM]: LLMNode, 
+  [NODE_TYPES.OUTPUT]: OutputNode,
+  [NODE_TYPES.TEXT]: TextNode, 
+  [NODE_TYPES.TRANSFORM]: TransformNode, 
+  [NODE_TYPES.FILTER]: FilterNode,
+  [NODE_TYPES.MATH]: MathNode, 
+  [NODE_TYPES.API]: APINode, 
+  [NODE_TYPES.DATABASE]: DatabaseNode,
 };
 
 const selector = (state) => ({
