@@ -71,10 +71,11 @@ export const TextNode = ({ id, data }) => {
         <label className="vs-label">template</label>
         <textarea
           ref={textareaRef}
-          className="vs-textarea"
+          className="vs-textarea nodrag"
           value={currText}
           onChange={handleTextChange}
           onBlur={handleBlur}
+          onKeyDown={(e)=>e.stopPropagation()}
           rows={2}
           placeholder="Type text or use {{variable}} syntax…"
         />
