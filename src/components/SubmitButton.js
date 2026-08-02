@@ -49,23 +49,23 @@ export const SubmitButton = () => {
   return (
     <>
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-      <div className="submit-wrap" style={{ position: 'relative' }}>
+      <div className="submit-wrap">
         {error && (
-          <div className="pipeline-toast" style={{ borderColor: 'rgba(239,68,68,0.3)', position: 'absolute', top: 50, right: 0 }}>
+          <div className="pipeline-toast error">
             <button className="toast-close" onClick={() => setError(null)}>×</button>
             <div className="pipeline-toast-title">
-              <span style={{ width:6, height:6, borderRadius:'50%', background:'#ef4444', display:'inline-block', boxShadow:'0 0 8px #ef4444' }} />
+              <span className="pipeline-toast-title-dot error" />
               Error
             </div>
-            <p style={{ fontSize: 12.5, color: '#f87171', margin: 0 }}>{error}</p>
+            <p className="toast-text-error">{error}</p>
           </div>
         )}
 
         {result && (
-          <div className="pipeline-toast" style={{ position: 'absolute', top: 50, right: 0 }}>
+          <div className="pipeline-toast">
             <button className="toast-close" onClick={() => setResult(null)}>×</button>
             <div className="pipeline-toast-title">
-              <span className="pipeline-toast-title-dot" />
+              <span className="pipeline-toast-title-dot info" />
               Pipeline Analysis
             </div>
             <div className="pipeline-toast-row">
@@ -82,20 +82,26 @@ export const SubmitButton = () => {
                 {result.is_dag ? '✓ Yes' : '✗ No'}
               </span>
             </div>
+            {result.error && (
+              <div className="pipeline-toast-row col">
+                <span className="pipeline-toast-key error">Error Details</span>
+                <span className="pipeline-toast-val error-desc">{result.error}</span>
+              </div>
+            )}
           </div>
         )}
 
         {isSubmitted && (
-          <div className="pipeline-toast" style={{ borderColor: 'rgba(34,197,94,0.3)', position: 'absolute', top: 50, right: 0 }}>
+          <div className="pipeline-toast success">
             <button className="toast-close" onClick={() => setIsSubmitted(false)}>×</button>
             <div className="pipeline-toast-title">
               Success
             </div>
-            <p style={{ fontSize: 13, color: '#16a34a', margin: 0 }}>Pipeline submitted successfully!</p>
+            <p className="toast-text-success">Pipeline submitted successfully!</p>
           </div>
         )}
 
-        <div style={{ display: 'flex', gap: '12px' }}>
+        <div className="submit-actions">
           <button className="review-btn" onClick={handleReview} disabled={loading}>
             {loading ? 'Reviewing…' : 'Review'}
           </button>

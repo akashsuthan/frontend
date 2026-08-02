@@ -1,0 +1,46 @@
+/* ─── Canvas Area ─────────────────────────────────────────────── */
+.canvas-area {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.react-flow__background {
+  background: var(--bg) !important;
+}
+
+.react-flow__background-pattern {
+  fill: var(--grid-dots) !important;
+}
+
+/* Edge styling */
+.react-flow__edge-path {
+  stroke: var(--edge-color) !important;
+  stroke-width: 2 !important;
+}
+
+.react-flow__edge.selected .react-flow__edge-path,
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: var(--edge-hover) !important;
+}
+
+/* ─── Handles ─────────────────────────────────────────────────── */
+.react-flow__handle {
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  border: 2px solid !important;
+  z-index: 10 !important;
+}
+
+.react-flow__handle-left {
+  background: var(--handle-left-bg) !important;
+  border-color: var(--handle-left-border) !important;
+  left: -8px !important;
+}
+
+.react-flow__handle-right {
+  background: var(--handle-right-bg) !important;
+  border-color: var(--handle-right-border) !important;
+  right: -8px !important;
+}

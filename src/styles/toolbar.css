@@ -1,0 +1,79 @@
+/* ─── Toolbar ────────────────────────────────────────────────── */
+.toolbar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 64px;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 20;
+}
+
+.toolbar-left-group {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-right-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-right: 8px;
+}
+
+.toolbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 32px;
+  flex-shrink: 0;
+}
+
+.toolbar-logo-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.toolbar-logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--logo-bg);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar-logo-text {
+  font-size: 17px;
+  font-weight: 700;
+  font-family: var(--font-serif);
+  color: var(--text-hi);
+  letter-spacing: -0.02em;
+}
+
+.toolbar-nodes {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex: 1;
+}
+
+.theme-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-hi);
+  cursor: pointer;
+  display: flex;
+  padding: 6px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--bg-field);
+}

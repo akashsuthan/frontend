@@ -1,0 +1,195 @@
+/* ─── Submit & Review Buttons ─────────────────────────────────── */
+.submit-wrap {
+  display: flex;
+  position: relative;
+}
+
+.submit-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.review-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 20px;
+  background: var(--bg-pill);
+  color: var(--text-hi);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.review-btn:hover {
+  background: var(--bg-field);
+  border-color: var(--border-focus);
+}
+
+.submit-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 24px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 24px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--btn-hover);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn:disabled,
+.review-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ─── Pipeline Result Toast ───────────────────────────────────── */
+.pipeline-toast {
+  background: var(--bg-pill);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: var(--toast-shadow);
+  min-width: 240px;
+  position: absolute;
+  top: 50px;
+  right: 0px;
+  z-index: 50;
+  animation: slideIn 0.25s ease-out;
+}
+
+.pipeline-toast.error {
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.pipeline-toast.success {
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pipeline-toast-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-hi);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pipeline-toast-title-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.pipeline-toast-title-dot.error {
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+}
+
+.pipeline-toast-title-dot.info {
+  background: var(--logo-bg);
+}
+
+.pipeline-toast-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.pipeline-toast-row:last-child {
+  border-bottom: none;
+}
+
+.pipeline-toast-row.col {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.pipeline-toast-key {
+  font-size: 12px;
+  color: var(--text-md);
+}
+
+.pipeline-toast-key.error {
+  color: #ef4444;
+}
+
+.pipeline-toast-val {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-hi);
+}
+
+.pipeline-toast-val.error-desc {
+  font-size: 11.5px;
+  font-weight: normal;
+  color: var(--text-md);
+  word-break: break-all;
+  line-height: 1.4;
+}
+
+.pipeline-toast-val.is-dag-yes {
+  color: #10b981;
+}
+.pipeline-toast-val.is-dag-no {
+  color: #ef4444;
+}
+
+.toast-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--text-lo);
+  cursor: pointer;
+  font-size: 18px;
+}
+.toast-close:hover {
+  color: var(--text-hi);
+}
+
+.toast-text-error {
+  font-size: 12.5px;
+  color: #f87171;
+  margin: 0;
+}
+
+.toast-text-success {
+  font-size: 13px;
+  color: #16a34a;
+  margin: 0;
+}
