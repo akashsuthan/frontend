@@ -14,6 +14,8 @@ export const NODE_TYPES = {
   TRANSFORM: 'transform',
   API: 'api',
   DATABASE: 'database',
+  CONDITION: 'condition',
+  CODE: 'code',
 };
 
 export const NODE_LABELS = {
@@ -24,6 +26,8 @@ export const NODE_LABELS = {
   TRANSFORM: 'Transform',
   API: 'API Request',
   DATABASE: 'Database',
+  CONDITION: 'Condition',
+  CODE: 'Code',
 };
 
 export const NODE_INFO = {
@@ -34,4 +38,6 @@ export const NODE_INFO = {
   TRANSFORM: 'Applies a string manipulation function (like Uppercase or Slugify) to the input data.',
   API: 'Makes an HTTP request to an external API endpoint.',
   DATABASE: 'Executes a query against a connected database collection.',
+  CONDITION: 'Evaluates a condition (e.g. greater than, equals) and routes flow based on the result.',
+  CODE: 'Executes custom Python or JavaScript code with the provided input.',
 };

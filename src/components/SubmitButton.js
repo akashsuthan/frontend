@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import { useStore } from '../store';
-import { shallow } from 'zustand/shallow';
-import { parsePipeline } from '../services/api';
+import { useState, useEffect } from "react";
+import { useStore } from "../store";
+import { shallow } from "zustand/shallow";
+import { parsePipeline } from "../services/api";
+import { X, Check } from "lucide-react";
 
 const selector = (state) => ({ nodes: state.nodes, edges: state.edges });
 
@@ -33,7 +34,7 @@ export const SubmitButton = () => {
         setIsReviewed(true);
       }
     } catch {
-      setError('Backend unreachable. Is the server running?');
+      setError("Backend unreachable. Is the server running?");
     } finally {
       setLoading(false);
     }
@@ -52,7 +53,9 @@ export const SubmitButton = () => {
       <div className="submit-wrap">
         {error && (
           <div className="pipeline-toast error">
-            <button className="toast-close" onClick={() => setError(null)}>×</button>
+            <button className="toast-close" onClick={() => setError(null)}>
+              <X size={18} />
+            </button>
             <div className="pipeline-toast-title">
               <span className="pipeline-toast-title-dot error" />
               Error
@@ -63,11 +66,10 @@ export const SubmitButton = () => {
 
         {result && (
           <div className="pipeline-toast">
-            <button className="toast-close" onClick={() => setResult(null)}>×</button>
-            <div className="pipeline-toast-title">
-              <span className="pipeline-toast-title-dot info" />
-              Pipeline Analysis
-            </div>
+            <button className="toast-close" onClick={() => setResult(null)}>
+              <X size={18} />
+            </button>
+            <div className="pipeline-toast-title">Pipeline Analysis</div>
             <div className="pipeline-toast-row">
               <span className="pipeline-toast-key">Nodes</span>
               <span className="pipeline-toast-val">{result.num_nodes}</span>
@@ -78,14 +80,27 @@ export const SubmitButton = () => {
             </div>
             <div className="pipeline-toast-row">
               <span className="pipeline-toast-key">Valid DAG</span>
-              <span className={`pipeline-toast-val ${result.is_dag ? 'is-dag-yes' : 'is-dag-no'}`}>
-                {result.is_dag ? '✓ Yes' : '✗ No'}
+              <span
+                className={`pipeline-toast-val ${result.is_dag ? "is-dag-yes" : "is-dag-no"}`}
+                style={{ display: "flex", alignItems: "center", gap: "4px" }}
+              >
+                {result.is_dag ? (
+                  <>
+                    <Check size={16} /> Yes
+                  </>
+                ) : (
+                  <>
+                    <X size={16} /> No
+                  </>
+                )}
               </span>
             </div>
             {result.error && (
               <div className="pipeline-toast-row col">
                 <span className="pipeline-toast-key error">Error Details</span>
-                <span className="pipeline-toast-val error-desc">{result.error}</span>
+                <span className="pipeline-toast-val error-desc">
+                  {result.error}
+                </span>
               </div>
             )}
           </div>
@@ -93,20 +108,33 @@ export const SubmitButton = () => {
 
         {isSubmitted && (
           <div className="pipeline-toast success">
-            <button className="toast-close" onClick={() => setIsSubmitted(false)}>×</button>
-            <div className="pipeline-toast-title">
-              Success
-            </div>
-            <p className="toast-text-success">Pipeline submitted successfully!</p>
+            <button
+              className="toast-close"
+              onClick={() => setIsSubmitted(false)}
+            >
+              <X size={18} />
+            </button>
+            <div className="pipeline-toast-title">Success</div>
+            <p className="toast-text-success">
+              Pipeline submitted successfully!
+            </p>
           </div>
         )}
 
         <div className="submit-actions">
-          <button className="review-btn" onClick={handleReview} disabled={loading}>
-            {loading ? 'Reviewing…' : 'Review'}
+          <button
+            className="review-btn"
+            onClick={handleReview}
+            disabled={loading}
+          >
+            {loading ? "Reviewing…" : "Review"}
           </button>
-          
-          <button className="submit-btn" onClick={handleSubmit} disabled={loading || !isReviewed}>
+
+          <button
+            className="submit-btn"
+            onClick={handleSubmit}
+            disabled={loading || !isReviewed}
+          >
             Submit
           </button>
         </div>

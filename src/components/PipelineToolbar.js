@@ -42,6 +42,11 @@ export const PipelineToolbar = () => {
             type={NODE_TYPES.DATABASE}
             label={NODE_LABELS.DATABASE}
           />
+          <DraggableNode
+            type={NODE_TYPES.CONDITION}
+            label={NODE_LABELS.CONDITION}
+          />
+          <DraggableNode type={NODE_TYPES.CODE} label={NODE_LABELS.CODE} />
         </div>
       </div>
 

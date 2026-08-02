@@ -6,7 +6,11 @@ import { InputNode } from './nodes/inputNode';
 import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
-import { TransformNode, APINode, DatabaseNode } from './nodes/newNodes';
+import { TransformNode } from './nodes/transformNode';
+import { APINode } from './nodes/apiNode';
+import { DatabaseNode } from './nodes/databaseNode';
+import { ConditionNode } from './nodes/conditionNode';
+import { CodeNode } from './nodes/codeNode';
 import { NODE_TYPES } from '../config';
 import 'reactflow/dist/style.css';
 
@@ -20,6 +24,8 @@ const nodeTypes = {
   [NODE_TYPES.TRANSFORM]: TransformNode, 
   [NODE_TYPES.API]: APINode, 
   [NODE_TYPES.DATABASE]: DatabaseNode,
+  [NODE_TYPES.CONDITION]: ConditionNode,
+  [NODE_TYPES.CODE]: CodeNode,
 };
 
 const selector = (state) => ({
