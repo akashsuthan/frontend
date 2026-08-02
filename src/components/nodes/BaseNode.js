@@ -1,14 +1,53 @@
-// BaseNode.js — Professional redesign
-
+import { useState } from "react";
 import { Handle } from "reactflow";
 import { useStore } from "../../store";
 import { X, Info } from 'lucide-react';
 
 export const BaseNode = ({ id, title, children, handles, style, info }) => {
+  const updateNodeField = useStore((state) => state.updateNodeField);
+  const customName = useStore((state) => state.nodes.find((n) => n.id === id)?.data?.customName);
+  
+  const [isEditing, setIsEditing] = useState(false);
+  const [editValue, setEditValue] = useState("");
+
+  const displayTitle = customName || title;
+
+  const handleDoubleClick = () => {
+    setEditValue(displayTitle);
+    setIsEditing(true);
+  };
+
+  const handleBlur = () => {
+    setIsEditing(false);
+    updateNodeField(id, "customName", editValue.trim());
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') handleBlur();
+  };
+
   return (
     <div className="vs-node" style={style}>
       <div className="vs-node-header">
-        <span className="vs-node-title">{title}</span>
+        {isEditing ? (
+          <input 
+            autoFocus
+            className="vs-node-title-input"
+            value={editValue}
+            onChange={(e) => setEditValue(e.target.value)}
+            onBlur={handleBlur}
+            onKeyDown={handleKeyDown}
+          />
+        ) : (
+          <span 
+            className="vs-node-title" 
+            onDoubleClick={handleDoubleClick}
+            title="Double click to rename"
+            style={{ cursor: 'text' }}
+          >
+            {displayTitle}
+          </span>
+        )}
         <div style={{ display: 'flex', gap: '4px' }}>
           {info && (
             <div className="vs-node-info" data-tooltip={info}>
